@@ -1212,12 +1212,19 @@
             document.getElementById('urgent-projects').textContent = urgent;
         }
 
-        // Function to render all projects
+        // Function to render all projects sorted by deadline
         function renderProjects() {
             const container = document.getElementById('projects-container');
             container.innerHTML = '';
             
-            projects.forEach(project => {
+            // Sort projects by deadline (ascending order)
+            const sortedProjects = [...projects].sort((a, b) => {
+                const dateA = createDeadlineDateTime(a.deadline, a.deadlineTime || "23:59");
+                const dateB = createDeadlineDateTime(b.deadline, b.deadlineTime || "23:59");
+                return dateA - dateB;
+            });
+            
+            sortedProjects.forEach(project => {
                 const projectEl = document.createElement('div');
                 projectEl.className = `project-card ${project.status === 'urgent' ? 'urgent' : ''} ${project.status === 'completed' ? 'completed' : ''}`;
                 projectEl.setAttribute('data-status', project.status);
