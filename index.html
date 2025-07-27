@@ -18,6 +18,23 @@
             --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
             --chart-bg: #f8f9fa;
+            --bg-color: #f5f7fa;
+            --text-color: #333;
+            --sidebar-bg: #2c3e50;
+            --sidebar-text: rgba(255, 255, 255, 0.8);
+            --card-bg: white;
+        }
+
+        /* Dark mode variables */
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --sidebar-bg: #121212;
+            --sidebar-text: rgba(255, 255, 255, 0.8);
+            --card-bg: #2d2d2d;
+            --light-gray: #444;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --chart-bg: #2d2d2d;
         }
         
         * {
@@ -30,9 +47,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .dashboard-container {
@@ -43,8 +61,8 @@
         
         /* Sidebar Styles */
         .sidebar {
-            background-color: var(--secondary-color);
-            color: white;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
             padding: 20px 0;
             position: sticky;
             top: 0;
@@ -83,7 +101,7 @@
             align-items: center;
             gap: 10px;
             padding: 12px 20px;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--sidebar-text);
             text-decoration: none;
             transition: var(--transition);
         }
@@ -110,7 +128,7 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--light-gray);
         }
         
         .header h1 {
@@ -139,7 +157,7 @@
         }
         
         .stat-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 8px;
             padding: 20px;
             box-shadow: var(--card-shadow);
@@ -195,7 +213,7 @@
         }
         
         .dashboard-section {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 8px;
             box-shadow: var(--card-shadow);
             padding: 20px;
@@ -245,7 +263,7 @@
         }
         
         .project-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 8px;
             box-shadow: var(--card-shadow);
             padding: 20px;
@@ -485,7 +503,7 @@
         }
         
         .team-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 8px;
             padding: 20px;
             box-shadow: var(--card-shadow);
@@ -545,7 +563,7 @@
         }
         
         .chart-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 8px;
             box-shadow: var(--card-shadow);
             padding: 20px;
@@ -597,7 +615,7 @@
         }
         
         .stat-bubble {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 50%;
             aspect-ratio: 1/1;
             display: flex;
@@ -643,6 +661,393 @@
             color: var(--dark-gray);
         }
         
+        /* CRM Section Styles */
+        .crm-section {
+            margin-top: 30px;
+        }
+        
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .leads-table th, .leads-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .leads-table th {
+            background-color: var(--light-gray);
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .leads-table tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .lead-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-new {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .status-contact {
+            background-color: rgba(155, 89, 182, 0.1);
+            color: #9b59b6;
+        }
+        
+        .status-qualified {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-proposal {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .status-closed {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .status-won {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--light-gray);
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        
+        .action-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .action-btn.primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .action-btn.primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .action-btn.success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .action-btn.success:hover {
+            background-color: #27ae60;
+        }
+        
+        .crm-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .crm-filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .crm-filter-group label {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+        
+        .crm-filter-group select, .crm-filter-group input {
+            padding: 8px 12px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .crm-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .add-lead-btn {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-lead-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .lead-details-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .lead-details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .lead-name {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+        }
+        
+        .lead-company {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            margin-top: 5px;
+        }
+        
+        .lead-details-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .lead-info-group h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .lead-info-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .lead-info-label {
+            font-weight: 600;
+            color: var(--dark-gray);
+            width: 120px;
+            font-size: 0.9rem;
+        }
+        
+        .lead-info-value {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        .lead-notes {
+            margin-top: 20px;
+        }
+        
+        .notes-list {
+            margin-top: 15px;
+        }
+        
+        .note-item {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--light-gray);
+            margin-bottom: 10px;
+        }
+        
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .note-author {
+            font-weight: 600;
+        }
+        
+        .note-date {
+            color: var(--dark-gray);
+        }
+        
+        .note-content {
+            font-size: 0.9rem;
+        }
+        
+        .add-note-form {
+            margin-top: 20px;
+        }
+        
+        .add-note-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            min-height: 100px;
+            margin-bottom: 10px;
+            font-family: inherit;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        /* Settings Section Styles */
+        .settings-section {
+            margin-top: 30px;
+        }
+        
+        .settings-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .settings-title {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+        }
+        
+        .settings-group {
+            margin-bottom: 25px;
+        }
+        
+        .settings-group-title {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .settings-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .settings-label {
+            font-weight: 600;
+        }
+        
+        .settings-description {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            margin-top: 5px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .team-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .team-select-btn {
+            padding: 8px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .team-select-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .team-select-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
         /* Responsive styles */
         @media (max-width: 992px) {
             .dashboard-container {
@@ -659,6 +1064,10 @@
             }
             
             .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .lead-details-content {
                 grid-template-columns: 1fr;
             }
         }
@@ -678,6 +1087,11 @@
                 margin-top: 15px;
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .leads-table {
+                display: block;
+                overflow-x: auto;
             }
         }
         
@@ -706,9 +1120,10 @@
             <ul class="sidebar-menu">
                 <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
                 <li><a href="#projects-section"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="#crm-section"><i class="fas fa-address-book"></i> CRM</a></li>
                 <li><a href="#team-section"><i class="fas fa-users"></i> Team</a></li>
                 <li><a href="#reports-section"><i class="fas fa-chart-pie"></i> Reports</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#settings-section"><i class="fas fa-cog"></i> Settings</a></li>
                 <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
             </ul>
         </aside>
@@ -778,11 +1193,140 @@
                         <button class="filter-btn" data-filter="active">Active</button>
                         <button class="filter-btn" data-filter="completed">Completed</button>
                         <button class="filter-btn" data-filter="urgent">Priority</button>
+                        <button class="filter-btn" data-filter="team">My Team</button>
                     </div>
                 </div>
                 
                 <div class="projects-grid" id="projects-container">
                     <!-- Projects will be added dynamically by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- CRM Section -->
+            <div class="dashboard-section crm-section" id="crm-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-address-book"></i> Customer Relationship Management</h2>
+                </div>
+                
+                <div class="crm-actions">
+                    <button class="add-lead-btn">
+                        <i class="fas fa-plus"></i> Add New Lead
+                    </button>
+                    <div class="crm-filters">
+                        <div class="crm-filter-group">
+                            <label for="status-filter">Status</label>
+                            <select id="status-filter">
+                                <option value="all">All Statuses</option>
+                                <option value="new">New</option>
+                                <option value="contact">Contacted</option>
+                                <option value="qualified">Qualified</option>
+                                <option value="proposal">Proposal Sent</option>
+                                <option value="closed">Closed</option>
+                                <option value="won">Won</option>
+                            </select>
+                        </div>
+                        <div class="crm-filter-group">
+                            <label for="source-filter">Source</label>
+                            <select id="source-filter">
+                                <option value="all">All Sources</option>
+                                <option value="website">Website</option>
+                                <option value="referral">Referral</option>
+                                <option value="event">Event</option>
+                                <option value="outbound">Outbound</option>
+                                <option value="social">Social Media</option>
+                            </select>
+                        </div>
+                        <div class="crm-filter-group">
+                            <label for="search-leads">Search</label>
+                            <input type="text" id="search-leads" placeholder="Search leads...">
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="leads-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Value</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leads-container">
+                        <!-- Leads will be added dynamically by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <!-- Lead Details Modal (hidden by default) -->
+                <div id="lead-details-modal" style="display: none;">
+                    <div class="lead-details-card">
+                        <div class="lead-details-header">
+                            <div>
+                                <h3 class="lead-name" id="lead-detail-name">John Doe</h3>
+                                <p class="lead-company" id="lead-detail-company">ABC Corporation</p>
+                            </div>
+                            <div>
+                                <span class="lead-status status-qualified" id="lead-detail-status">Qualified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="lead-details-content">
+                            <div class="lead-info-group">
+                                <h4>Contact Information</h4>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Email:</span>
+                                    <span class="lead-info-value" id="lead-detail-email">john.doe@abccorp.com</span>
+                                </div>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Phone:</span>
+                                    <span class="lead-info-value" id="lead-detail-phone">+971 50 123 4567</span>
+                                </div>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Mobile:</span>
+                                    <span class="lead-info-value" id="lead-detail-mobile">+971 50 123 4567</span>
+                                </div>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Address:</span>
+                                    <span class="lead-info-value" id="lead-detail-address">Dubai, UAE</span>
+                                </div>
+                            </div>
+                            
+                            <div class="lead-info-group">
+                                <h4>Opportunity Details</h4>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Source:</span>
+                                    <span class="lead-info-value" id="lead-detail-source">Website</span>
+                                </div>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Value:</span>
+                                    <span class="lead-info-value" id="lead-detail-value">AED 250,000</span>
+                                </div>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Probability:</span>
+                                    <span class="lead-info-value" id="lead-detail-probability">70%</span>
+                                </div>
+                                <div class="lead-info-item">
+                                    <span class="lead-info-label">Expected Close:</span>
+                                    <span class="lead-info-value" id="lead-detail-close-date">2023-12-15</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lead-notes">
+                            <h4>Notes</h4>
+                            <div class="notes-list" id="lead-notes-list">
+                                <!-- Notes will be added dynamically -->
+                            </div>
+                            
+                            <div class="add-note-form">
+                                <textarea placeholder="Add a new note..."></textarea>
+                                <button class="action-btn primary">Add Note</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -852,6 +1396,89 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Settings Section -->
+            <div class="dashboard-section settings-section" id="settings-section">
+                <div class="settings-card">
+                    <div class="settings-header">
+                        <h2 class="settings-title"><i class="fas fa-cog"></i> Settings</h2>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h3 class="settings-group-title"><i class="fas fa-palette"></i> Appearance</h3>
+                        
+                        <div class="settings-option">
+                            <div>
+                                <div class="settings-label">Dark Mode</div>
+                                <div class="settings-description">Switch between light and dark theme</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="dark-mode-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h3 class="settings-group-title"><i class="fas fa-users"></i> Team Selection</h3>
+                        <div class="settings-description">Select which team's projects you want to see by default</div>
+                        
+                        <div class="team-selector">
+                            <button class="team-select-btn active" data-team="all">All Teams</button>
+                            <button class="team-select-btn" data-team="sales">Sales</button>
+                            <button class="team-select-btn" data-team="technical">Technical</button>
+                            <button class="team-select-btn" data-team="commercial">Commercial</button>
+                            <button class="team-select-btn" data-team="my-team">My Team</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h3 class="settings-group-title"><i class="fas fa-bell"></i> Notifications</h3>
+                        
+                        <div class="settings-option">
+                            <div>
+                                <div class="settings-label">Email Notifications</div>
+                                <div class="settings-description">Receive email alerts for important updates</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="email-notifications" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="settings-option">
+                            <div>
+                                <div class="settings-label">Browser Notifications</div>
+                                <div class="settings-description">Show desktop notifications for urgent tasks</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="browser-notifications" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h3 class="settings-group-title"><i class="fas fa-user"></i> Profile Settings</h3>
+                        
+                        <div class="settings-option">
+                            <div>
+                                <div class="settings-label">Update Profile Picture</div>
+                                <div class="settings-description">Change your avatar image</div>
+                            </div>
+                            <button class="action-btn">Change</button>
+                        </div>
+                        
+                        <div class="settings-option">
+                            <div>
+                                <div class="settings-label">Change Password</div>
+                                <div class="settings-description">Update your login password</div>
+                            </div>
+                            <button class="action-btn">Change</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -915,6 +1542,13 @@
                 avatar: "https://ui-avatars.com/api/?name=Rafia+Rahat&background=2ecc71&color=fff"
             }
         ];
+
+        // Current user (for team filtering)
+        const currentUser = {
+            id: 4, // Santam Sharma
+            name: "Santam Sharma",
+            department: "Technical"
+        };
 
         // Project data with team member IDs
         const projects = [
@@ -1036,6 +1670,126 @@
             }
         ];
 
+        // CRM Data - Leads and Contacts
+        const leads = [
+            {
+                id: 1,
+                name: "John Smith",
+                company: "Emirates Group",
+                email: "john.smith@emirates.com",
+                phone: "+971 4 123 4567",
+                mobile: "+971 50 123 4567",
+                status: "qualified",
+                source: "website",
+                value: 150000,
+                probability: 70,
+                expectedClose: "2025-08-15",
+                notes: [
+                    {
+                        id: 1,
+                        author: "Amine Boukhris",
+                        date: "2025-07-20",
+                        content: "Initial contact made. Client interested in our FM services for new office building."
+                    },
+                    {
+                        id: 2,
+                        author: "Sama Lavala",
+                        date: "2025-07-22",
+                        content: "Sent proposal for cleaning and maintenance services. Follow up scheduled for next week."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "Sarah Johnson",
+                company: "Dubai Properties",
+                email: "s.johnson@dubaiproperties.ae",
+                phone: "+971 4 234 5678",
+                mobile: "+971 50 234 5678",
+                status: "contact",
+                source: "referral",
+                value: 250000,
+                probability: 50,
+                expectedClose: "2025-09-01",
+                notes: [
+                    {
+                        id: 1,
+                        author: "Afzal A. Rahiman",
+                        date: "2025-07-15",
+                        content: "Referred by Mohammed Al Maktoum. Initial meeting went well."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: "Mohammed Ali",
+                company: "Khazna Data Centers",
+                email: "m.ali@khazna.com",
+                phone: "+971 2 345 6789",
+                mobile: "+971 50 345 6789",
+                status: "proposal",
+                source: "event",
+                value: 500000,
+                probability: 80,
+                expectedClose: "2025-08-30",
+                notes: [
+                    {
+                        id: 1,
+                        author: "Amine Boukhris",
+                        date: "2025-07-10",
+                        content: "Met at GITEX event. Discussed facility management needs for new data center."
+                    },
+                    {
+                        id: 2,
+                        author: "Astrid Dalgado",
+                        date: "2025-07-18",
+                        content: "Technical requirements gathered. Preparing proposal."
+                    }
+                ]
+            },
+            {
+                id: 4,
+                name: "Lisa Wong",
+                company: "TikTok Middle East",
+                email: "lisa.wong@tiktok.com",
+                phone: "+971 4 456 7890",
+                mobile: "+971 50 456 7890",
+                status: "won",
+                source: "website",
+                value: 350000,
+                probability: 100,
+                expectedClose: "2025-07-25",
+                notes: [
+                    {
+                        id: 1,
+                        author: "Sama Lavala",
+                        date: "2025-06-28",
+                        content: "Initial inquiry through website contact form."
+                    },
+                    {
+                        id: 2,
+                        author: "Assel Bader",
+                        date: "2025-07-05",
+                        content: "Contract signed! Project kickoff scheduled for next month."
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: "Ahmed Hassan",
+                company: "WASL Asset Management",
+                email: "a.hassan@wasl.ae",
+                phone: "+971 4 567 8901",
+                mobile: "+971 50 567 8901",
+                status: "new",
+                source: "outbound",
+                value: 180000,
+                probability: 30,
+                expectedClose: "2025-10-15",
+                notes: []
+            }
+        ];
+
         // Function to get team member by ID
         function getTeamMember(id) {
             return teamMembers.find(member => member.id === id);
@@ -1061,6 +1815,95 @@
                 
                 container.appendChild(teamCard);
             });
+        }
+
+        // Function to render CRM leads
+        function renderLeads() {
+            const container = document.getElementById('leads-container');
+            container.innerHTML = '';
+            
+            leads.forEach(lead => {
+                const statusClass = `status-${lead.status}`;
+                let statusText = lead.status.charAt(0).toUpperCase() + lead.status.slice(1);
+                
+                // Format status text for display
+                if (statusText === 'Contact') statusText = 'Contacted';
+                if (statusText === 'Proposal') statusText = 'Proposal Sent';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${lead.name}</td>
+                    <td>${lead.company}</td>
+                    <td>${lead.email}</td>
+                    <td>${lead.phone}</td>
+                    <td><span class="lead-status ${statusClass}">${statusText}</span></td>
+                    <td>AED ${lead.value.toLocaleString()}</td>
+                    <td>
+                        <button class="action-btn" onclick="viewLeadDetails(${lead.id})">View</button>
+                        <button class="action-btn primary" onclick="editLead(${lead.id})">Edit</button>
+                    </td>
+                `;
+                
+                container.appendChild(row);
+            });
+        }
+
+        // Function to view lead details
+        function viewLeadDetails(leadId) {
+            const lead = leads.find(l => l.id === leadId);
+            if (!lead) return;
+            
+            // Update modal with lead details
+            document.getElementById('lead-detail-name').textContent = lead.name;
+            document.getElementById('lead-detail-company').textContent = lead.company;
+            document.getElementById('lead-detail-email').textContent = lead.email;
+            document.getElementById('lead-detail-phone').textContent = lead.phone;
+            document.getElementById('lead-detail-mobile').textContent = lead.mobile;
+            document.getElementById('lead-detail-address').textContent = "Dubai, UAE"; // Default for demo
+            document.getElementById('lead-detail-source').textContent = lead.source.charAt(0).toUpperCase() + lead.source.slice(1);
+            document.getElementById('lead-detail-value').textContent = `AED ${lead.value.toLocaleString()}`;
+            document.getElementById('lead-detail-probability').textContent = `${lead.probability}%`;
+            document.getElementById('lead-detail-close-date').textContent = lead.expectedClose;
+            
+            // Update status
+            const statusElement = document.getElementById('lead-detail-status');
+            statusElement.textContent = lead.status.charAt(0).toUpperCase() + lead.status.slice(1);
+            if (lead.status === 'contact') statusElement.textContent = 'Contacted';
+            if (lead.status === 'proposal') statusElement.textContent = 'Proposal Sent';
+            
+            // Remove all status classes and add the correct one
+            statusElement.className = 'lead-status';
+            statusElement.classList.add(`status-${lead.status}`);
+            
+            // Render notes
+            const notesContainer = document.getElementById('lead-notes-list');
+            notesContainer.innerHTML = '';
+            
+            if (lead.notes.length === 0) {
+                notesContainer.innerHTML = '<p>No notes yet.</p>';
+            } else {
+                lead.notes.forEach(note => {
+                    const noteElement = document.createElement('div');
+                    noteElement.className = 'note-item';
+                    noteElement.innerHTML = `
+                        <div class="note-header">
+                            <span class="note-author">${note.author}</span>
+                            <span class="note-date">${note.date}</span>
+                        </div>
+                        <div class="note-content">${note.content}</div>
+                    `;
+                    notesContainer.appendChild(noteElement);
+                });
+            }
+            
+            // Show modal (simple display for demo)
+            document.getElementById('lead-details-modal').style.display = 'block';
+        }
+
+        // Function to edit lead (placeholder)
+        function editLead(leadId) {
+            alert(`Editing lead with ID: ${leadId}`);
+            // In a real application, this would open an edit form or modal
         }
 
         // Function to update stats counters
@@ -1102,7 +1945,7 @@
         }
 
         // Function to render all projects sorted by deadline
-        function renderProjects() {
+        function renderProjects(filterTeam = null) {
             const container = document.getElementById('projects-container');
             container.innerHTML = '';
             
@@ -1114,6 +1957,18 @@
             });
             
             sortedProjects.forEach(project => {
+                // Skip projects that don't belong to the filtered team
+                if (filterTeam) {
+                    if (filterTeam === 'my-team' && !project.team.includes(currentUser.id)) {
+                        return;
+                    } else if (filterTeam !== 'my-team' && filterTeam !== 'all') {
+                        const teamMembersInProject = project.team.map(id => getTeamMember(id));
+                        if (!teamMembersInProject.some(member => member.department.toLowerCase() === filterTeam)) {
+                            return;
+                        }
+                    }
+                }
+                
                 const projectEl = document.createElement('div');
                 projectEl.className = `project-card ${project.status === 'urgent' ? 'urgent' : ''} ${project.status === 'completed' ? 'completed' : ''}`;
                 projectEl.setAttribute('data-status', project.status);
@@ -1370,13 +2225,33 @@
                     if (filter === 'all' || 
                         (filter === 'active' && status === 'active') || 
                         (filter === 'completed' && isCompleted) ||
-                        (filter === 'urgent' && isUrgent)) {
+                        (filter === 'urgent' && isUrgent) ||
+                        (filter === 'team' && project.style.display !== 'none')) {
                         project.style.display = 'block';
                     } else {
                         project.style.display = 'none';
                     }
                 });
             });
+        });
+        
+        // Team selection filter
+        document.querySelectorAll('.team-select-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                document.querySelectorAll('.team-select-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const team = btn.getAttribute('data-team');
+                renderProjects(team);
+            });
+        });
+        
+        // Dark mode toggle
+        document.getElementById('dark-mode-toggle').addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode', this.checked);
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', this.checked);
         });
         
         // Chart functions
@@ -1649,8 +2524,14 @@
         
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            // Check for saved dark mode preference
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            document.getElementById('dark-mode-toggle').checked = darkMode;
+            document.body.classList.toggle('dark-mode', darkMode);
+            
             renderProjects();
             renderTeam();
+            renderLeads();
             updateClock();
             
             setInterval(updateClock, 1000);
