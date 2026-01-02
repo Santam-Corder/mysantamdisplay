@@ -13,6 +13,7 @@
             --success-color: #2ecc71;
             --warning-color: #f39c12;
             --danger-color: #e74c3c;
+            --declined-color: #6c7a89;
             --light-gray: #ecf0f1;
             --dark-gray: #7f8c8d;
             --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -27,6 +28,7 @@
             --gradient-success: linear-gradient(135deg, #2ecc71, #27ae60);
             --gradient-warning: linear-gradient(135deg, #f39c12, #e67e22);
             --gradient-danger: linear-gradient(135deg, #e74c3c, #c0392b);
+            --gradient-declined: linear-gradient(135deg, #6c7a89, #4a5568);
         }
 
         /* Dark mode variables */
@@ -229,6 +231,10 @@
             background: var(--gradient-danger);
         }
         
+        .stat-card.declined::before {
+            background: var(--gradient-declined);
+        }
+        
         .stat-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -262,6 +268,11 @@
         .stat-icon.danger {
             background-color: rgba(231, 76, 60, 0.1);
             color: var(--danger-color);
+        }
+        
+        .stat-icon.declined {
+            background-color: rgba(108, 122, 137, 0.1);
+            color: var(--declined-color);
         }
         
         .stat-info h3 {
@@ -300,6 +311,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
         .section-header h2 {
@@ -313,6 +326,7 @@
         .filter-controls {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
         
         .filter-btn {
@@ -323,6 +337,9 @@
             cursor: pointer;
             transition: var(--transition);
             font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .filter-btn:hover {
@@ -349,6 +366,8 @@
             overflow: hidden;
             transition: var(--transition);
             border-left: 4px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
         }
         
         .project-card:hover {
@@ -368,10 +387,15 @@
             border-left-color: var(--success-color);
         }
         
+        .project-card.declined {
+            border-left-color: var(--declined-color);
+        }
+        
         .project-card h3 {
             margin-top: 0;
             color: var(--secondary-color);
-            padding-right: 30px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
         }
         
         .project-info {
@@ -379,6 +403,7 @@
             flex-direction: column;
             gap: 12px;
             margin: 15px 0;
+            flex-grow: 1;
         }
         
         .info-item {
@@ -421,11 +446,16 @@
             background-color: var(--danger-color);
         }
         
-        .progress-details {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--dark-gray);
+        .progress.warning {
+            background-color: var(--warning-color);
+        }
+        
+        .progress.completed {
+            background-color: var(--success-color);
+        }
+        
+        .progress.declined {
+            background-color: var(--declined-color);
         }
         
         .deadline {
@@ -451,6 +481,11 @@
             background-color: rgba(46, 204, 113, 0.1);
             color: var(--success-color);
         }
+        
+        .deadline.declined {
+            background-color: rgba(108, 122, 137, 0.1);
+            color: var(--declined-color);
+        }
 
         .countdown {
             font-family: monospace;
@@ -471,6 +506,11 @@
         .countdown.warning {
             background-color: rgba(243, 156, 18, 0.1);
             color: var(--warning-color);
+        }
+        
+        .countdown.declined {
+            background-color: rgba(108, 122, 137, 0.1);
+            color: var(--declined-color);
         }
         
         .team-members {
@@ -543,9 +583,61 @@
             color: var(--success-color);
         }
         
+        .status-declined {
+            background-color: rgba(108, 122, 137, 0.1);
+            color: var(--declined-color);
+        }
+        
         .status-delayed {
             background-color: rgba(231, 76, 60, 0.1);
             color: var(--danger-color);
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+            justify-content: center;
+        }
+        
+        .project-action-btn {
+            background: none;
+            border: none;
+            color: var(--dark-gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            min-width: 100px;
+        }
+        
+        .project-action-btn:hover {
+            color: white;
+        }
+        
+        .project-action-btn.edit {
+            background-color: var(--light-gray);
+        }
+        
+        .project-action-btn.edit:hover {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .project-action-btn.delete {
+            background-color: var(--light-gray);
+        }
+        
+        .project-action-btn.delete:hover {
+            background: var(--gradient-danger);
+            color: white;
         }
         
         .time-display {
@@ -895,6 +987,189 @@
             border-color: var(--primary-color);
         }
         
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .modal-header h3 {
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .close-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--danger-color);
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="time"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .team-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .team-member-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .team-member-checkbox:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .team-member-checkbox input[type="checkbox"] {
+            margin: 0;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .cancel-btn,
+        .submit-btn,
+        .update-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .cancel-btn {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+        }
+        
+        .submit-btn,
+        .update-btn {
+            background: var(--gradient-success);
+            color: white;
+        }
+        
+        .cancel-btn:hover {
+            background-color: var(--dark-gray);
+            color: white;
+        }
+        
+        .submit-btn:hover,
+        .update-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        #project-progress {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        #progress-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Responsive styles */
         @media (max-width: 992px) {
             .dashboard-container {
@@ -930,6 +1205,14 @@
                 margin-top: 15px;
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .project-actions {
+                flex-direction: column;
+            }
+            
+            .project-action-btn {
+                width: 100%;
             }
         }
         
@@ -1013,6 +1296,15 @@
                         <p>Urgent</p>
                     </div>
                 </div>
+                <div class="stat-card declined">
+                    <div class="stat-icon declined">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="declined-projects">0</h3>
+                        <p>Declined</p>
+                    </div>
+                </div>
             </div>
             
             <!-- Time Display -->
@@ -1029,9 +1321,12 @@
                         <button class="filter-btn active" data-filter="all">All Projects</button>
                         <button class="filter-btn" data-filter="active">Active</button>
                         <button class="filter-btn" data-filter="completed">Completed</button>
+                        <button class="filter-btn" data-filter="declined">Declined</button>
                         <button class="filter-btn" data-filter="urgent">Priority</button>
-                        <button class="filter-btn" data-filter="team">My Team</button>
                     </div>
+                    <button id="add-project-btn" class="filter-btn" style="background: var(--gradient-success); color: white;">
+                        <i class="fas fa-plus"></i> Add Project
+                    </button>
                 </div>
                 
                 <div class="projects-grid" id="projects-container">
@@ -1072,6 +1367,10 @@
                     <div class="stat-bubble" style="background-color: rgba(231, 76, 60, 0.1);">
                         <div class="stat-value" id="urgent-projects-stat">0</div>
                         <div class="stat-label">Urgent</div>
+                    </div>
+                    <div class="stat-bubble" style="background-color: rgba(108, 122, 137, 0.1);">
+                        <div class="stat-value" id="declined-projects-stat">0</div>
+                        <div class="stat-label">Declined</div>
                     </div>
                 </div>
                 
@@ -1191,6 +1490,71 @@
         </main>
     </div>
 
+    <!-- Add/Edit Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> <span id="modal-title">Add New Project</span></h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="project-form">
+                    <input type="hidden" id="project-id">
+                    
+                    <div class="form-group">
+                        <label for="project-name">Project Name *</label>
+                        <input type="text" id="project-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-lead">Project Lead *</label>
+                        <select id="project-lead" required>
+                            <option value="">Select Lead</option>
+                            <!-- Options will be populated from teamMembers -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deadline">Deadline *</label>
+                        <input type="date" id="deadline" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deadline-time">Deadline Time</label>
+                        <input type="time" id="deadline-time" value="23:59">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-status">Status *</label>
+                        <select id="project-status" required>
+                            <option value="active">In Progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="declined">Declined</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-team">Team Members</label>
+                        <div class="team-selection" id="team-selection">
+                            <!-- Team members will be added here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-progress">Progress (%)</label>
+                        <input type="range" id="project-progress" min="0" max="100" value="0">
+                        <span id="progress-value">0%</span>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="submit-btn" id="form-submit-btn">Add Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Team data with photos and designations
         const teamMembers = [
@@ -1244,6 +1608,13 @@
                 avatar: "https://ui-avatars.com/api/?name=New+Member&background=e74c3c&color=fff"
             },
             {
+                id: 8,
+                name: "Rafia Rahat",
+                position: "Bid Administrator",
+                department: "Technical",
+                avatar: "https://ui-avatars.com/api/?name=Rafia+Rahat&background=2ecc71&color=fff"
+            },
+            {
                 id: 9,
                 name: "Bensin Oommen",
                 position: "Sales Asst. Manager",
@@ -1251,11 +1622,11 @@
                 avatar: "https://ui-avatars.com/api/?name=Bensin+Oommen&background=2ecc71&color=fff"
             },
             {
-                id: 8,
-                name: "Rafia Rahat",
-                position: "Bid Administrator",
-                department: "Technical",
-                avatar: "https://ui-avatars.com/api/?name=Rafia+Rahat&background=2ecc71&color=fff"
+                id: 10,
+                name: "Sales",
+                position: "Sales Department",
+                department: "Sales",
+                avatar: "https://ui-avatars.com/api/?name=Sales+Team&background=f39c12&color=fff"
             }
         ];
 
@@ -1267,18 +1638,16 @@
         };
 
         // Project data with team member IDs
-        const projects = [
+        let projects = [
             {
                 id: 1,
                 title: "DAEP Security",
                 status: "active",
                 deadline: "2026-01-06",
                 deadlineTime: "16:00",
-                lead: "Sales",
+                lead: "Amine Boukhris",
                 leadId: 1,
-                startDate: "December 26, 2025",
                 progress: 70,
-                timeline: "10am",
                 team: [4]
             },
             {
@@ -1287,11 +1656,9 @@
                 status: "active",
                 deadline: "2026-01-09",
                 deadlineTime: "12:00",
-                lead: "Bensin",
+                lead: "Bensin Oommen",
                 leadId: 9,
-                startDate: "December 25, 2025",
                 progress: 50,
-                timeline: "",
                 team: []
             },
             {
@@ -1300,11 +1667,9 @@
                 status: "completed",
                 deadline: "2025-12-03",
                 deadlineTime: "15:00",
-                lead: "Bensin",
+                lead: "Amine Boukhris",
                 leadId: 1,
-                startDate: "August 10, 2025",
                 progress: 100,
-                timeline: "",
                 team: [4, 9]
             },
             {
@@ -1313,12 +1678,10 @@
                 status: "completed",
                 deadline: "2025-12-25",
                 deadlineTime: "18:00",
-                lead: "Sales",
+                lead: "Santam Sharma",
                 leadId: 4,
-                startDate: "November 13, 2025",
                 progress: 100,
-                timeline: "",
-                team: [3, 4, 5, 3, 8]
+                team: [3, 4, 5, 8]
             },
             {
                 id: 5,
@@ -1326,11 +1689,9 @@
                 status: "completed",
                 deadline: "2025-10-07",
                 deadlineTime: "23:59",
-                lead: "Operations",
+                lead: "Sama Lavala",
                 leadId: 2,
-                startDate: "Spet 08, 2025",
                 progress: 100,
-                timeline: "",
                 team: [5, 4, 8]
             },
             {
@@ -1339,24 +1700,20 @@
                 status: "completed",
                 deadline: "2025-12-10",
                 deadlineTime: "18:00",
-                lead: "Bensin",
+                lead: "Bensin Oommen",
                 leadId: 9,
-                startDate: "November 20, 2025",
                 progress: 100,
-                timeline: "",
                 team: [4, 9, 3]
             },
             {
                 id: 7,
                 title: "Core Prime",
-                status: "completed",
+                status: "declined",
                 deadline: "2025-12-10",
                 deadlineTime: "23:30",
-                lead: "Bensin",
+                lead: "Vimal Raj",
                 leadId: 3,
-                startDate: "June 12, 2025",
-                progress: 100,
-                timeline: "",
+                progress: 30,
                 team: [4, 6]
             },
             {
@@ -1365,11 +1722,9 @@
                 status: "completed",
                 deadline: "2025-12-19",
                 deadlineTime: "14:00",
-                lead: "Bensin",
+                lead: "Astrid Dalgado",
                 leadId: 5,
-                startDate: "July 05, 2025",
                 progress: 100,
-                timeline: "",
                 team: [4, 5, 7, 9]
             },
             {
@@ -1377,12 +1732,20 @@
                 title: "Rufescent Hotels",
                 status: "completed",
                 deadline: "2025-10-07",
-                lead: "Kartik",
+                lead: "Amine Boukhris",
                 leadId: 1,
-                startDate: "August 12, 2025",
                 progress: 100,
-                timeline: "",
                 team: [4]
+            },
+            {
+                id: 10,
+                title: "New Project Example",
+                status: "active",
+                deadline: "2026-02-01",
+                lead: "Santam Sharma",
+                leadId: 4,
+                progress: 30,
+                team: [4, 5, 8]
             }
         ];
 
@@ -1418,14 +1781,15 @@
             const total = projects.length;
             const completed = projects.filter(p => p.status === 'completed').length;
             const active = projects.filter(p => p.status === 'active').length;
+            const declined = projects.filter(p => p.status === 'declined').length;
             
             // For urgent, we'll need to calculate based on deadlines
             const now = new Date();
             let urgent = 0;
             
             projects.forEach(project => {
-                if (project.status !== 'completed') {
-                    const deadline = createDeadlineDateTime(project.deadline, project.deadlineTime);
+                if (project.status === 'active') {
+                    const deadline = createDeadlineDateTime(project.deadline, project.deadlineTime || "23:59");
                     const diffTime = deadline - now;
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                     
@@ -1440,15 +1804,17 @@
             document.getElementById('completed-projects').textContent = completed;
             document.getElementById('active-projects').textContent = active;
             document.getElementById('urgent-projects').textContent = urgent;
+            document.getElementById('declined-projects').textContent = declined;
             
             // Update report stats
             document.getElementById('total-projects-stat').textContent = total;
             document.getElementById('completed-projects-stat').textContent = completed;
             document.getElementById('active-projects-stat').textContent = active;
             document.getElementById('urgent-projects-stat').textContent = urgent;
+            document.getElementById('declined-projects-stat').textContent = declined;
             
             // Update charts
-            updateCharts(total, completed, active, urgent);
+            updateCharts(total, completed, active, declined, urgent);
         }
 
         // Function to render all projects sorted by deadline
@@ -1470,32 +1836,37 @@
                         return;
                     } else if (filterTeam !== 'my-team' && filterTeam !== 'all') {
                         const teamMembersInProject = project.team.map(id => getTeamMember(id));
-                        if (!teamMembersInProject.some(member => member.department.toLowerCase() === filterTeam)) {
+                        if (!teamMembersInProject.some(member => member && member.department.toLowerCase() === filterTeam)) {
                             return;
                         }
                     }
                 }
                 
                 const projectEl = document.createElement('div');
-                projectEl.className = `project-card ${project.status === 'urgent' ? 'urgent' : ''} ${project.status === 'completed' ? 'completed' : ''}`;
+                projectEl.className = `project-card ${getProjectCardClass(project)}`;
                 projectEl.setAttribute('data-status', project.status);
                 projectEl.setAttribute('data-deadline', project.deadline);
                 if (project.deadlineTime) {
                     projectEl.setAttribute('data-deadline-time', project.deadlineTime);
                 }
+                projectEl.setAttribute('data-id', project.id);
                 
                 let statusClass = 'status-active';
-                let statusText = 'Active';
+                let statusText = 'In Progress';
                 if (project.status === 'completed') {
                     statusClass = 'status-completed';
                     statusText = 'Completed';
-                } else if (project.status === 'urgent') {
+                } else if (project.status === 'declined') {
+                    statusClass = 'status-declined';
+                    statusText = 'Declined';
+                } else if (isProjectUrgent(project)) {
                     statusClass = 'status-delayed';
                     statusText = 'Urgent';
                 }
                 
                 // Get lead information
                 const lead = getTeamMember(project.leadId);
+                const leadName = lead ? lead.name : project.lead;
                 
                 // Generate team member avatars
                 const teamAvatars = project.team.map(memberId => {
@@ -1519,11 +1890,11 @@
                     <div class="project-info">
                         <div class="info-item">
                             <span class="info-label">Project Lead:</span>
-                            <span class="info-value">${project.lead}</span>
+                            <span class="info-value">${leadName}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Start Date:</span>
-                            <span class="info-value">${project.startDate}</span>
+                            <span class="info-label">Deadline:</span>
+                            <span class="info-value">${formatDateForDisplay(project.deadline)}${project.deadlineTime ? ' at ' + formatTimeForDisplay(project.deadlineTime) : ''}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Progress:</span>
@@ -1533,31 +1904,33 @@
                     
                     <div class="progress-container">
                         <div class="progress-bar">
-                            <div class="progress" id="progress-bar-${project.id}" style="width: ${project.progress}%"></div>
-                        </div>
-                        <div class="progress-details">
-                            <span>Start: ${project.startDate.split(',')[0]}</span>
-                            <span>Deadline: ${formatDateForDisplay(project.deadline)}${project.deadlineTime ? ' at ' + formatTimeForDisplay(project.deadlineTime) : ''}</span>
+                            <div class="progress ${getProgressClass(project)}" id="progress-bar-${project.id}" style="width: ${project.progress}%"></div>
                         </div>
                     </div>
                     
-                    <div class="countdown" id="countdown-${project.id}">
-                        Calculating countdown...
-                    </div>
+                    ${project.status !== 'declined' ? `
+                        <div class="countdown" id="countdown-${project.id}">
+                            Calculating countdown...
+                        </div>
+                        
+                        <div class="deadline" id="deadline-${project.id}">
+                            Calculating...
+                        </div>
+                    ` : ''}
                     
-                    <div class="deadline" id="deadline-${project.id}">
-                        Calculating...
-                    </div>
+                    ${project.team && project.team.length > 0 ? `
+                        <div class="team-members">
+                            ${teamAvatars}
+                        </div>
+                    ` : ''}
                     
-                    <div class="team-members">
-                        ${project.timeline ? `<div class="team-member">
-                            <i class="fas fa-clock member-avatar" style="display: flex; align-items: center; justify-content: center; background: #f39c12; color: white;"></i>
-                            <div class="member-info">
-                                <div class="member-name">Timeline</div>
-                                <div class="member-role">${project.timeline}</div>
-                            </div>
-                        </div>` : ''}
-                        ${teamAvatars}
+                    <div class="project-actions">
+                        <button class="project-action-btn edit" data-id="${project.id}">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="project-action-btn delete" data-id="${project.id}">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
                     </div>
                 `;
                 
@@ -1566,16 +1939,157 @@
             
             updateProjectDeadlines(new Date());
             updateStats();
+            
+            // Add event listeners for edit and delete buttons
+            addProjectActionListeners();
+        }
+
+        // Function to add event listeners to project action buttons
+        function addProjectActionListeners() {
+            // Remove existing event listeners first
+            document.querySelectorAll('.project-action-btn.edit').forEach(btn => {
+                btn.replaceWith(btn.cloneNode(true));
+            });
+            
+            document.querySelectorAll('.project-action-btn.delete').forEach(btn => {
+                btn.replaceWith(btn.cloneNode(true));
+            });
+            
+            // Add new event listeners
+            document.querySelectorAll('.project-action-btn.edit').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const projectId = parseInt(btn.getAttribute('data-id'));
+                    editProject(projectId);
+                });
+            });
+            
+            document.querySelectorAll('.project-action-btn.delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const projectId = parseInt(btn.getAttribute('data-id'));
+                    if (confirm('Are you sure you want to delete this project?')) {
+                        deleteProject(projectId);
+                    }
+                });
+            });
+        }
+
+        // Function to delete a project
+        function deleteProject(projectId) {
+            const index = projects.findIndex(p => p.id === projectId);
+            if (index !== -1) {
+                projects.splice(index, 1);
+                renderProjects();
+                alert('Project deleted successfully!');
+            }
+        }
+
+        // Function to edit a project
+        function editProject(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) {
+                console.error('Project not found with ID:', projectId);
+                return;
+            }
+            
+            // Set modal title
+            document.getElementById('modal-title').textContent = 'Edit Project';
+            document.getElementById('form-submit-btn').textContent = 'Update Project';
+            
+            // Fill form with project data
+            document.getElementById('project-id').value = project.id;
+            document.getElementById('project-name').value = project.title;
+            
+            // Populate team leads dropdown first
+            const leadSelect = document.getElementById('project-lead');
+            leadSelect.innerHTML = '<option value="">Select Lead</option>';
+            teamMembers.forEach(member => {
+                const option = document.createElement('option');
+                option.value = member.id;
+                option.textContent = member.name;
+                leadSelect.appendChild(option);
+            });
+            
+            // Now set the selected value
+            document.getElementById('project-lead').value = project.leadId;
+            
+            // Set deadline and time
+            document.getElementById('deadline').value = project.deadline;
+            document.getElementById('deadline-time').value = project.deadlineTime || '23:59';
+            
+            // Set status and progress
+            document.getElementById('project-status').value = project.status;
+            document.getElementById('project-progress').value = project.progress;
+            document.getElementById('progress-value').textContent = `${project.progress}%`;
+            
+            // Populate team members selection
+            const teamSelection = document.getElementById('team-selection');
+            teamSelection.innerHTML = '';
+            teamMembers.forEach(member => {
+                const label = document.createElement('label');
+                label.className = 'team-member-checkbox';
+                const isChecked = project.team && project.team.includes(member.id);
+                label.innerHTML = `
+                    <input type="checkbox" value="${member.id}" ${isChecked ? 'checked' : ''}>
+                    <span>${member.name.split(' ')[0]}</span>
+                `;
+                teamSelection.appendChild(label);
+            });
+            
+            // Show modal
+            showProjectModal();
+        }
+
+        // Helper function to get progress bar class
+        function getProgressClass(project) {
+            if (project.status === 'completed') return 'completed';
+            if (project.status === 'declined') return 'declined';
+            if (isProjectUrgent(project)) return 'urgent';
+            if (isProjectWarning(project)) return 'warning';
+            return '';
+        }
+
+        // Helper function to determine project card class
+        function getProjectCardClass(project) {
+            if (project.status === 'completed') return 'completed';
+            if (project.status === 'declined') return 'declined';
+            if (isProjectUrgent(project)) return 'urgent';
+            if (isProjectWarning(project)) return 'warning';
+            return '';
+        }
+
+        // Helper function to check if project is urgent
+        function isProjectUrgent(project) {
+            if (project.status === 'completed' || project.status === 'declined') return false;
+            
+            const deadline = createDeadlineDateTime(project.deadline, project.deadlineTime || "23:59");
+            const diffTime = deadline - new Date();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            return diffDays <= 3 && diffTime > 0;
+        }
+
+        // Helper function to check if project is in warning state
+        function isProjectWarning(project) {
+            if (project.status === 'completed' || project.status === 'declined') return false;
+            
+            const deadline = createDeadlineDateTime(project.deadline, project.deadlineTime || "23:59");
+            const diffTime = deadline - new Date();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            return diffDays <= 7 && diffDays > 3 && diffTime > 0;
         }
 
         // Helper function to format date for display
         function formatDateForDisplay(dateStr) {
             const date = new Date(dateStr);
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
         // Helper function to format time for display
         function formatTimeForDisplay(timeStr) {
+            if (!timeStr) return '';
             const [hours, minutes] = timeStr.split(':');
             const hour = parseInt(hours);
             const ampm = hour >= 12 ? 'PM' : 'AM';
@@ -1618,13 +2132,16 @@
                 const deadlineStr = project.getAttribute('data-deadline');
                 const deadlineTime = project.getAttribute('data-deadline-time');
                 const deadline = createDeadlineDateTime(deadlineStr, deadlineTime);
-                const startDateStr = project.querySelector('.info-item:nth-child(2) .info-value').textContent;
-                const startDate = parseDateString(startDateStr);
-                const progressValue = project.querySelector('.info-item:nth-child(3) .info-value').textContent;
-                const isCompleted = progressValue === '100%';
-                const projectId = project.querySelector('.countdown').id.split('-')[1];
+                const status = project.getAttribute('data-status');
+                const projectId = project.getAttribute('data-id');
+                
+                if (!projectId || status === 'declined') return;
+                
                 const countdownElement = document.getElementById(`countdown-${projectId}`);
+                const deadlineElement = document.getElementById(`deadline-${projectId}`);
                 const progressBar = document.getElementById(`progress-bar-${projectId}`);
+                
+                if (!countdownElement || !deadlineElement) return;
                 
                 // Calculate time remaining
                 const diffTime = deadline - now;
@@ -1633,13 +2150,19 @@
                 // Calculate countdown (days, hours, minutes, seconds)
                 let countdownText = '';
                 let countdownClass = '';
+                let deadlineText = '';
+                let deadlineClass = '';
                 
-                if (isCompleted) {
+                if (status === 'completed') {
                     countdownText = 'Completed';
                     countdownClass = 'normal';
+                    deadlineText = 'Completed';
+                    deadlineClass = 'normal';
                 } else if (diffTime <= 0) {
                     countdownText = 'Deadline passed';
                     countdownClass = 'urgent';
+                    deadlineText = `Overdue by ${Math.abs(diffDays)} days`;
+                    deadlineClass = 'urgent';
                 } else {
                     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
                     const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1654,10 +2177,16 @@
                     
                     if (diffDays <= 3) {
                         countdownClass = 'urgent';
-                        project.classList.add('urgent');
+                        deadlineClass = 'urgent';
+                        deadlineText = `Due in ${diffDays} days`;
                     } else if (diffDays <= 7) {
                         countdownClass = 'warning';
-                        project.classList.add('warning');
+                        deadlineClass = 'warning';
+                        deadlineText = `Due in ${diffDays} days`;
+                    } else {
+                        countdownClass = 'normal';
+                        deadlineClass = 'normal';
+                        deadlineText = `Due in ${diffDays} days`;
                     }
                 }
                 
@@ -1666,52 +2195,24 @@
                 countdownElement.className = `countdown ${countdownClass}`;
                 
                 // Update deadline display
-                const deadlineElement = project.querySelector('.deadline');
-                if (diffDays <= 0) {
-                    if (isCompleted) {
-                        deadlineElement.textContent = 'Completed on time';
-                        deadlineElement.className = 'deadline normal';
-                    } else {
-                        deadlineElement.textContent = `Overdue by ${Math.abs(diffDays)} days`;
-                        deadlineElement.className = 'deadline urgent';
-                        project.classList.add('urgent');
-                    }
-                } else if (diffDays <= 3) {
-                    deadlineElement.textContent = `Due in ${diffDays} days`;
-                    deadlineElement.className = 'deadline urgent';
+                deadlineElement.textContent = deadlineText;
+                deadlineElement.className = `deadline ${deadlineClass}`;
+                
+                // Update project card class for urgent/warning
+                project.classList.remove('urgent', 'warning');
+                if (deadlineClass === 'urgent') {
                     project.classList.add('urgent');
-                } else if (diffDays <= 7) {
-                    deadlineElement.textContent = `Due in ${diffDays} days`;
-                    deadlineElement.className = 'deadline warning';
+                } else if (deadlineClass === 'warning') {
                     project.classList.add('warning');
-                } else {
-                    deadlineElement.textContent = `Due in ${diffDays} days`;
-                    deadlineElement.className = 'deadline normal';
                 }
                 
                 // Update progress bar color if overdue
-                if (diffDays <= 0 && !isCompleted) {
-                    progressBar.style.backgroundColor = 'var(--danger-color)';
-                    progressBar.classList.add('urgent');
+                if (progressBar) {
+                    if (diffTime <= 0 && status !== 'completed') {
+                        progressBar.style.backgroundColor = 'var(--danger-color)';
+                    }
                 }
             });
-        }
-        
-        function parseDateString(dateStr) {
-            // Simple date parser (works with "Month Day, Year" format)
-            const months = {
-                'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
-                'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
-            };
-            
-            const parts = dateStr.split(' ');
-            if (parts.length === 3) {
-                const month = months[parts[0]];
-                const day = parseInt(parts[1].replace(',', ''));
-                const year = parseInt(parts[2]);
-                return new Date(year, month, day);
-            }
-            return null;
         }
         
         // Filter projects
@@ -1722,22 +2223,30 @@
                 btn.classList.add('active');
                 
                 const filter = btn.getAttribute('data-filter');
-                const projects = document.querySelectorAll('.project-card');
+                const projectCards = document.querySelectorAll('.project-card');
                 
-                projects.forEach(project => {
+                projectCards.forEach(project => {
                     const status = project.getAttribute('data-status');
                     const isUrgent = project.classList.contains('urgent');
                     const isCompleted = status === 'completed';
+                    const isDeclined = status === 'declined';
+                    const isActive = status === 'active';
                     
-                    if (filter === 'all' || 
-                        (filter === 'active' && status === 'active') || 
-                        (filter === 'completed' && isCompleted) ||
-                        (filter === 'urgent' && isUrgent) ||
-                        (filter === 'team' && project.style.display !== 'none')) {
-                        project.style.display = 'block';
-                    } else {
-                        project.style.display = 'none';
+                    let shouldShow = false;
+                    
+                    if (filter === 'all') {
+                        shouldShow = true;
+                    } else if (filter === 'active' && isActive) {
+                        shouldShow = true;
+                    } else if (filter === 'completed' && isCompleted) {
+                        shouldShow = true;
+                    } else if (filter === 'declined' && isDeclined) {
+                        shouldShow = true;
+                    } else if (filter === 'urgent' && isUrgent) {
+                        shouldShow = true;
                     }
+                    
+                    project.style.display = shouldShow ? 'block' : 'none';
                 });
             });
         });
@@ -1761,25 +2270,126 @@
             localStorage.setItem('darkMode', this.checked);
         });
         
+        // Function to show project modal (for both add and edit)
+        function showProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.style.display = 'flex';
+            
+            // Update progress value display
+            const progressSlider = document.getElementById('project-progress');
+            const progressValue = document.getElementById('progress-value');
+            
+            // Remove existing event listener to avoid duplicates
+            const newSlider = progressSlider.cloneNode(true);
+            progressSlider.parentNode.replaceChild(newSlider, progressSlider);
+            
+            newSlider.addEventListener('input', function() {
+                progressValue.textContent = `${this.value}%`;
+            });
+        }
+
+        // Function to close modal
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.style.display = 'none';
+            document.getElementById('project-form').reset();
+            document.getElementById('progress-value').textContent = '0%';
+            document.getElementById('modal-title').textContent = 'Add New Project';
+            document.getElementById('form-submit-btn').textContent = 'Add Project';
+            document.getElementById('project-id').value = '';
+        }
+
+        // Function to add or update project
+        function saveProject(event) {
+            event.preventDefault();
+            
+            const projectId = document.getElementById('project-id').value;
+            const name = document.getElementById('project-name').value;
+            const leadId = parseInt(document.getElementById('project-lead').value);
+            const deadline = document.getElementById('deadline').value;
+            const deadlineTime = document.getElementById('deadline-time').value;
+            const status = document.getElementById('project-status').value;
+            const progress = parseInt(document.getElementById('project-progress').value);
+            
+            // Get selected team members
+            const selectedTeam = [];
+            document.querySelectorAll('#team-selection input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedTeam.push(parseInt(checkbox.value));
+            });
+            
+            // Get lead name
+            const lead = teamMembers.find(m => m.id === leadId);
+            const leadName = lead ? lead.name : 'Unknown';
+            
+            if (projectId) {
+                // Update existing project
+                const index = projects.findIndex(p => p.id === parseInt(projectId));
+                if (index !== -1) {
+                    projects[index] = {
+                        ...projects[index],
+                        title: name,
+                        status: status,
+                        deadline: deadline,
+                        deadlineTime: deadlineTime,
+                        lead: leadName,
+                        leadId: leadId,
+                        progress: progress,
+                        team: selectedTeam
+                    };
+                }
+            } else {
+                // Create new project object
+                const newProject = {
+                    id: projects.length > 0 ? Math.max(...projects.map(p => p.id)) + 1 : 1,
+                    title: name,
+                    status: status,
+                    deadline: deadline,
+                    deadlineTime: deadlineTime,
+                    lead: leadName,
+                    leadId: leadId,
+                    progress: progress,
+                    team: selectedTeam
+                };
+                
+                // Add to projects array
+                projects.push(newProject);
+            }
+            
+            // Re-render projects
+            renderProjects();
+            
+            // Close modal
+            closeProjectModal();
+            
+            // Show success message
+            alert(`Project ${projectId ? 'updated' : 'added'} successfully!`);
+        }
+        
         // Chart functions
-        function updateCharts(total, completed, active, urgent) {
+        function updateCharts(total, completed, active, declined, urgent) {
+            // Destroy existing charts if they exist
+            if (window.pieChartInstance) window.pieChartInstance.destroy();
+            if (window.barChartInstance) window.barChartInstance.destroy();
+            if (window.lineChartInstance) window.lineChartInstance.destroy();
+            if (window.doughnutChartInstance) window.doughnutChartInstance.destroy();
+            
             // Pie Chart - Project Status
             const pieCtx = document.getElementById('pieChart').getContext('2d');
-            const pieChart = new Chart(pieCtx, {
+            window.pieChartInstance = new Chart(pieCtx, {
                 type: 'pie',
                 data: {
-                    labels: ['Completed', 'Active', 'Urgent'],
+                    labels: ['Completed', 'Active', 'Declined'],
                     datasets: [{
-                        data: [completed, active - urgent, urgent],
+                        data: [completed, active - urgent, declined],
                         backgroundColor: [
                             'rgba(46, 204, 113, 0.7)',
                             'rgba(52, 152, 219, 0.7)',
-                            'rgba(231, 76, 60, 0.7)'
+                            'rgba(108, 122, 137, 0.7)'
                         ],
                         borderColor: [
                             'rgba(46, 204, 113, 1)',
                             'rgba(52, 152, 219, 1)',
-                            'rgba(231, 76, 60, 1)'
+                            'rgba(108, 122, 137, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -1818,33 +2428,38 @@
             
             // Bar Chart - Project Timeline
             const barCtx = document.getElementById('barChart').getContext('2d');
-            const barChart = new Chart(barCtx, {
+            window.barChartInstance = new Chart(barCtx, {
                 type: 'bar',
                 data: {
                     labels: projects.map(p => p.title.substring(0, 15) + (p.title.length > 15 ? '...' : '')),
                     datasets: [{
                         label: 'Days Remaining',
                         data: projects.map(p => {
+                            if (p.status === 'completed' || p.status === 'declined') return 0;
                             const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime || "23:59");
                             const diffTime = deadline - new Date();
                             return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                         }),
                         backgroundColor: projects.map(p => {
+                            if (p.status === 'completed') return 'rgba(46, 204, 113, 0.7)';
+                            if (p.status === 'declined') return 'rgba(108, 122, 137, 0.7)';
+                            
                             const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime || "23:59");
                             const diffTime = deadline - new Date();
                             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                             
-                            if (p.status === 'completed') return 'rgba(46, 204, 113, 0.7)';
                             if (diffDays <= 0) return 'rgba(231, 76, 60, 0.7)';
                             if (diffDays <= 3) return 'rgba(243, 156, 18, 0.7)';
                             return 'rgba(52, 152, 219, 0.7)';
                         }),
                         borderColor: projects.map(p => {
+                            if (p.status === 'completed') return 'rgba(46, 204, 113, 1)';
+                            if (p.status === 'declined') return 'rgba(108, 122, 137, 1)';
+                            
                             const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime || "23:59");
                             const diffTime = deadline - new Date();
                             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                             
-                            if (p.status === 'completed') return 'rgba(46, 204, 113, 1)';
                             if (diffDays <= 0) return 'rgba(231, 76, 60, 1)';
                             if (diffDays <= 3) return 'rgba(243, 156, 18, 1)';
                             return 'rgba(52, 152, 219, 1)';
@@ -1871,6 +2486,7 @@
                                 label: function(context) {
                                     const days = context.raw;
                                     if (days < 0) return `Overdue by ${Math.abs(days)} days`;
+                                    if (days === 0) return 'Completed/Declined';
                                     return `${days} days remaining`;
                                 }
                             }
@@ -1893,7 +2509,7 @@
             
             // Line Chart - Project Progress
             const lineCtx = document.getElementById('lineChart').getContext('2d');
-            const lineChart = new Chart(lineCtx, {
+            window.lineChartInstance = new Chart(lineCtx, {
                 type: 'line',
                 data: {
                     labels: projects.map(p => p.title.substring(0, 15) + (p.title.length > 15 ? '...' : '')),
@@ -1904,7 +2520,8 @@
                         borderColor: 'rgba(52, 152, 219, 1)',
                         borderWidth: 2,
                         pointBackgroundColor: projects.map(p => {
-                            if (p.progress === 100) return 'rgba(46, 204, 113, 1)';
+                            if (p.status === 'completed') return 'rgba(46, 204, 113, 1)';
+                            if (p.status === 'declined') return 'rgba(108, 122, 137, 1)';
                             if (p.progress < 30) return 'rgba(231, 76, 60, 1)';
                             if (p.progress < 70) return 'rgba(243, 156, 18, 1)';
                             return 'rgba(52, 152, 219, 1)';
@@ -1947,49 +2564,52 @@
             
             // Doughnut Chart - Project Urgency
             const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
-            const doughnutChart = new Chart(doughnutCtx, {
+            window.doughnutChartInstance = new Chart(doughnutCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['On Track', 'Warning', 'Urgent', 'Overdue'],
+                    labels: ['On Track', 'Warning', 'Urgent', 'Overdue', 'Completed/Declined'],
                     datasets: [{
                         data: [
                             projects.filter(p => {
-                                if (p.status === 'completed') return false;
-                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime);
+                                if (p.status === 'completed' || p.status === 'declined') return false;
+                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime || "23:59");
                                 const diffTime = deadline - new Date();
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                                 return diffDays > 7 && diffTime > 0;
                             }).length,
                             projects.filter(p => {
-                                if (p.status === 'completed') return false;
-                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime);
+                                if (p.status === 'completed' || p.status === 'declined') return false;
+                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime || "23:59");
                                 const diffTime = deadline - new Date();
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                                 return diffDays <= 7 && diffDays > 3 && diffTime > 0;
                             }).length,
                             projects.filter(p => {
-                                if (p.status === 'completed') return false;
-                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime);
+                                if (p.status === 'completed' || p.status === 'declined') return false;
+                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime || "23:59");
                                 const diffTime = deadline - new Date();
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                                 return diffDays <= 3 && diffTime > 0;
                             }).length,
                             projects.filter(p => {
-                                if (p.status === 'completed') return false;
-                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime);
+                                if (p.status === 'completed' || p.status === 'declined') return false;
+                                const deadline = createDeadlineDateTime(p.deadline, p.deadlineTime || "23:59");
                                 return deadline < new Date();
-                            }).length
+                            }).length,
+                            projects.filter(p => p.status === 'completed' || p.status === 'declined').length
                         ],
                         backgroundColor: [
                             'rgba(52, 152, 219, 0.7)',
                             'rgba(243, 156, 18, 0.7)',
                             'rgba(231, 76, 60, 0.7)',
+                            'rgba(155, 89, 182, 0.7)',
                             'rgba(108, 122, 137, 0.7)'
                         ],
                         borderColor: [
                             'rgba(52, 152, 219, 1)',
                             'rgba(243, 156, 18, 1)',
                             'rgba(231, 76, 60, 1)',
+                            'rgba(155, 89, 182, 1)',
                             'rgba(108, 122, 137, 1)'
                         ],
                         borderWidth: 1
@@ -2001,10 +2621,10 @@
                     plugins: {
                         legend: {
                             position: 'right',
-                            },
+                        },
                         title: {
                             display: true,
-                            text: 'Project Urgency Status',
+                            text: 'Project Status Overview',
                             font: {
                                 size: 16
                             }
@@ -2014,7 +2634,7 @@
                                 label: function(context) {
                                     const label = context.label || '';
                                     const value = context.raw || 0;
-                                    const percentage = Math.round((value / active) * 100);
+                                    const percentage = Math.round((value / total) * 100);
                                     return `${label}: ${value} (${percentage}%)`;
                                 }
                             }
@@ -2039,6 +2659,62 @@
             renderProjects();
             renderTeam();
             updateClock();
+            
+            // Add project button event listener
+            document.getElementById('add-project-btn').addEventListener('click', () => {
+                // Reset modal for adding new project
+                document.getElementById('modal-title').textContent = 'Add New Project';
+                document.getElementById('form-submit-btn').textContent = 'Add Project';
+                document.getElementById('project-id').value = '';
+                document.getElementById('project-form').reset();
+                document.getElementById('progress-value').textContent = '0%';
+                
+                // Populate team leads dropdown
+                const leadSelect = document.getElementById('project-lead');
+                leadSelect.innerHTML = '<option value="">Select Lead</option>';
+                teamMembers.forEach(member => {
+                    const option = document.createElement('option');
+                    option.value = member.id;
+                    option.textContent = member.name;
+                    leadSelect.appendChild(option);
+                });
+                
+                // Populate team members selection
+                const teamSelection = document.getElementById('team-selection');
+                teamSelection.innerHTML = '';
+                teamMembers.forEach(member => {
+                    const label = document.createElement('label');
+                    label.className = 'team-member-checkbox';
+                    label.innerHTML = `
+                        <input type="checkbox" value="${member.id}">
+                        <span>${member.name.split(' ')[0]}</span>
+                    `;
+                    teamSelection.appendChild(label);
+                });
+                
+                // Set default deadline to 30 days from now
+                const futureDate = new Date();
+                futureDate.setDate(futureDate.getDate() + 30);
+                const futureDateStr = futureDate.toISOString().split('T')[0];
+                document.getElementById('deadline').value = futureDateStr;
+                
+                // Show modal
+                showProjectModal();
+            });
+            
+            // Modal close events
+            document.querySelector('.close-modal').addEventListener('click', closeProjectModal);
+            document.querySelector('.cancel-btn').addEventListener('click', closeProjectModal);
+            
+            // Form submission
+            document.getElementById('project-form').addEventListener('submit', saveProject);
+            
+            // Close modal when clicking outside
+            document.getElementById('project-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeProjectModal();
+                }
+            });
             
             setInterval(updateClock, 1000);
         });
